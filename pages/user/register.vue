@@ -53,9 +53,9 @@
 						class="
 							flex flex-row
 							cursor-not-allowed
-							opacity-50
+							bg-green-200
 							md:flex-col
-							bg-green-400
+							
 							p-5
 							rounded-xl
 							text-center text-white text-3xl
@@ -93,9 +93,9 @@
 						class="
 							flex flex-row
 							cursor-not-allowed
-							opacity-50
+							bg-red-200
 							md:flex-col
-							bg-red-400
+					
 							p-5
 							rounded-xl
 							text-center text-white text-3xl
