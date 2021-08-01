@@ -14,12 +14,14 @@
 						:title="item.title"
 						:to="item.to"
 						:icon="item.icon"
+						@click="page"
 					/>
 					<NavItem
 						v-if="isAdmin"
 						title="สำหรับผู้ดูแลระบบ"
 						to="/admin"
 						icon="user-shield"
+						@click="page"
 					/>
 					<li
 						class="nav-item px-4 py-2.5 hover:bg-green-500 rounded"
