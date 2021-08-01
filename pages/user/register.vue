@@ -113,6 +113,7 @@
 			<div class="today-status p-5 rounded-xl bg-gray-50">
 				<p class="text-4xl font-bold mb-3">สถานะวันนี้</p>
 				<History
+					:key="status.updatedAt"
 					class="bg-white"
 					:location="status.location"
 					:date="status.date"
@@ -152,8 +153,6 @@ export default {
 	methods: {
 		async checkIn() {
 			const inputLocation = this.inputLocation;
-			console.log("Call CheckIn Method");
-			console.log(inputLocation);
 			try {
 				await this.$apollo
 					.mutate({
@@ -163,11 +162,11 @@ export default {
 						},
 					})
 					.then(({ data }) => {
-						this.status = data.userCheckIn;
+						this.status = data.checkIn;
 					});
 				this.$swal({
 					title: "ลงเวลาปฎิบัติราชการเรียบร้อยแล้ว",
-					text: `เวลา ${this.status.checkIn}`,
+					message: `เวลา ${this.status.checkIn}`,
 					icon: "success",
 				});
 			} catch (error) {
@@ -187,11 +186,11 @@ export default {
 						mutation: userCheckOut,
 					})
 					.then(({ data }) => {
-						this.status = data.userCheckOut;
+						this.status = data.checkOut;
 					});
 				this.$swal({
 					title: "ลงเวลาปฎิบัติราชการเรียบร้อยแล้ว",
-					text: `เวลา ${this.status.checkOut}`,
+					message: `เวลา ${this.status.checkOut}`,
 					icon: "success",
 				});
 			} catch (error) {
@@ -201,6 +200,7 @@ export default {
 					icon: "error",
 				});
 			}
+			console.log(this.status);
 		},
 		checkInConfirm() {
 			this.$swal({
@@ -263,6 +263,7 @@ export default {
 						date
 						checkIn
 						checkOut
+						updatedAt
 					}
 				}
 			`,

@@ -4,5 +4,6 @@ mutation checkIn($location: String!) {
 		date
 		checkIn
 		checkOut
+		updatedAt
 	}
 }

@@ -1,8 +1,9 @@
 mutation checkOut {
     checkOut{
         location
-						date
-						checkIn
-						checkOut
+		date
+		checkIn
+		checkOut
+        updatedAt
     }
 }
