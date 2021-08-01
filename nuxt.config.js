@@ -62,6 +62,8 @@ export default {
 				"faUserCircle",
 				"faCalendarAlt",
 				"faBan",
+				"faBars",
+				"faTimes"
 			],
 		},
 	},
