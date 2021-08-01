@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 export default {
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
@@ -21,9 +23,7 @@ export default {
 	css: [],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [
-		'~plugins/vue-final-modal.js'
-	],
+	plugins: ["~plugins/vue-final-modal.js"],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -35,15 +35,15 @@ export default {
 		"@nuxtjs/tailwindcss",
 		"@nuxtjs/fontawesome",
 		"@nuxtjs/apollo",
-		'@nuxtjs/google-fonts',
-		'@nuxtjs/moment',
+		"@nuxtjs/google-fonts",
+		"@nuxtjs/moment",
 	],
 
 	googleFonts: {
-		display: 'swap',
+		display: "swap",
 		families: {
-			Prompt : true,
-		}
+			Prompt: true,
+		},
 	},
 
 	fontawesome: {
@@ -61,7 +61,7 @@ export default {
 				"faUsersCog",
 				"faUserCircle",
 				"faCalendarAlt",
-				"faBan"
+				"faBan",
 			],
 		},
 	},
@@ -69,22 +69,22 @@ export default {
 	apollo: {
 		clientConfigs: {
 			default: {
-				httpEndpoint: "http://localhost:4000/graphql",
+				httpEndpoint: process.env.API_ENDPOINT,
 			},
 		},
 	},
 
 	moment: {
-		defaultLocale: 'th',
-		locales: ['th'],
-		timezone: true
-	  },
+		defaultLocale: "th",
+		locales: ["th"],
+		timezone: true,
+	},
 
 	// Modules: https://go.nuxtjs.dev/config-modules
-	modules: ['vue-sweetalert2/nuxt'],
+	modules: ["vue-sweetalert2/nuxt"],
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
-		transpile: ['vue-final-modal']
+		transpile: ["vue-final-modal"],
 	},
 };
