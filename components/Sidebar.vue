@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- Tailwind Sidebar -->
-		<div class="sidebar bg-green-600 h-screen p-2 text-white">
+		<div>
 			<div class="sidebar-wrapper">
 				<div class="flex flex-row items-center title mb-10 px-4 py-2.5">
 					<font-awesome-icon icon="briefcase" class="px-2 text-6xl" />

@@ -3,13 +3,13 @@
 		<div class="content m-auto">
 			<div class="title mb-20 text-center">
 				<img class="mx-auto" src="logo.png" alt="" />
-				<h1 class="text-7xl font-bold">ระบบลงเวลาปฏิบัติราชการ</h1>
-				<h2 class="text-5xl">โรงเรียนสินปุญคุณวิชญ์</h2>
+				<h1 class="text-4xl md:text-7xl font-bold">ระบบลงเวลาปฏิบัติราชการ</h1>
+				<h2 class="text-2xl md:text-5xl">โรงเรียนสินปุญคุณวิชญ์</h2>
 			</div>
-			<div class="bg-white p-5 rounded w-1/2 mx-auto">
+			<div class="bg-white p-5 rounded w-full mx-1 md:w-1/2 md:mx-auto">
 				<LoginForm />
 			</div>
-			<small>Deploy on Heroka</small>
+			<small class="text-white text-center">&copy; Ratchanon Panmas</small>
 		</div>
 	</div>
 </template>
