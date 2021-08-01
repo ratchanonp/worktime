@@ -105,6 +105,13 @@ export default {
 			} catch (e) {
 				// eslint-disable-next-line no-console
 				console.error(e);
+				this.isAuthenticated = false;
+				this.loggingIn = false;
+				this.$swal({
+					title: "เกิดข้อผิดพลาด",
+					text: e.message,
+					icon: "error",
+				});
 			}
 		},
 	},
