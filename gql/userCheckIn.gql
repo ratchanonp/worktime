@@ -1,0 +1,8 @@
+mutation checkIn($location: String!) {
+	checkIn(location: $location) {
+		location
+		date
+		checkIn
+		checkOut
+	}
+}

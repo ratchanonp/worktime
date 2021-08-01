@@ -73,7 +73,17 @@ export default {
 			},
 		};
 	},
+	created() {
+		this.authCheck();
+	},
 	methods: {
+		authCheck() {
+			const hasToken = !!this.$apolloHelpers.getToken();
+			if(hasToken) {
+				this.$router.push({ name: "user" });
+				this.isAuthenticated = true;
+			}
+		},
 		async onSubmit() {
 			this.loggingIn = true;
 			const user = this.user;
@@ -87,7 +97,7 @@ export default {
 				this.isAuthenticated = true;
 
 				await this.$apolloHelpers.onLogin(res.login, undefined, {
-					expires: "15min",
+					expires: 1,
 				});
 				this.$router.push({ name: "user" });
 				// eslint-disable-next-line no-console
@@ -98,5 +108,6 @@ export default {
 			}
 		},
 	},
+	
 };
 </script>

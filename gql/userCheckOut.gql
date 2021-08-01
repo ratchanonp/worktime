@@ -1,0 +1,8 @@
+mutation checkOut {
+    checkOut{
+        location
+						date
+						checkIn
+						checkOut
+    }
+}

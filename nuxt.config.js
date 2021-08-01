@@ -21,7 +21,9 @@ export default {
 	css: [],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [],
+	plugins: [
+		'~plugins/vue-final-modal.js'
+	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -33,7 +35,16 @@ export default {
 		"@nuxtjs/tailwindcss",
 		"@nuxtjs/fontawesome",
 		"@nuxtjs/apollo",
+		'@nuxtjs/google-fonts',
+		'@nuxtjs/moment',
 	],
+
+	googleFonts: {
+		display: 'swap',
+		families: {
+			Prompt : true,
+		}
+	},
 
 	fontawesome: {
 		icons: {
@@ -50,6 +61,7 @@ export default {
 				"faUsersCog",
 				"faUserCircle",
 				"faCalendarAlt",
+				"faBan"
 			],
 		},
 	},
@@ -62,9 +74,17 @@ export default {
 		},
 	},
 
+	moment: {
+		defaultLocale: 'th',
+		locales: ['th'],
+		timezone: true
+	  },
+
 	// Modules: https://go.nuxtjs.dev/config-modules
-	modules: [],
+	modules: ['vue-sweetalert2/nuxt'],
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
-	build: {},
+	build: {
+		transpile: ['vue-final-modal']
+	},
 };

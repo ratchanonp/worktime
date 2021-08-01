@@ -15,6 +15,28 @@
 						:to="item.to"
 						:icon="item.icon"
 					/>
+					<NavItem
+						v-if="isAdmin"
+						title="สำหรับผู้ดูแลระบบ"
+						to="/admin"
+						icon="user-shield"
+					/>
+					<li
+						class="nav-item px-4 py-2.5 hover:bg-green-500 rounded"
+						@click="onLogout"
+					>
+						<div class="flex flex-row">
+							<div class="w-8 mr-2">
+								<font-awesome-icon
+									icon="sign-out-alt"
+									class="text-xl"
+								/>
+							</div>
+							<div>
+								<span class="nav-link-text">ออกจากระบบ</span>
+							</div>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -22,6 +44,9 @@
 	</div>
 </template>
 <script>
+// eslint-disable-next-line camelcase
+import jwt_decode from "jwt-decode";
+
 export default {
 	data() {
 		return {
@@ -44,20 +69,26 @@ export default {
 					to: "/user/history",
 					icon: "history",
 				},
-				{
-					id: "admin",
-					title: "สำหรับผู้ดูแลระบบ",
-					to: "/admin",
-					icon: "user-shield",
-				},
-				{
-					id: "sign-out",
-					title: "ออกจากระบบ",
-					to: "/",
-					icon: "sign-out-alt",
-				},
 			],
+			isAdmin: false,
 		};
+	},
+	created() {
+		this.checkAdmin();
+	},
+	methods: {
+		async checkAdmin() {
+			const token = this.$apolloHelpers.getToken();
+			const decode = await jwt_decode(token);
+			if (decode.role.includes("ADMIN")) {
+				this.isAdmin = true;
+			}
+			// console.log(decode);
+		},
+		async onLogout() {
+			await this.$apolloHelpers.onLogout();
+			this.$router.push("/");
+		},
 	},
 };
 </script>
