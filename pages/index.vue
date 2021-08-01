@@ -9,6 +9,7 @@
 			<div class="bg-white p-5 rounded w-1/2 mx-auto">
 				<LoginForm />
 			</div>
+			<small>Deploy on Heroka</small>
 		</div>
 	</div>
 </template>
