@@ -11,6 +11,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				'prompt' : ["'Prompt'", 'sans-serif'],
+				'roboto-mono': ["'Roboto Mono'", 'monospace']
 			},
 		},
 	},
