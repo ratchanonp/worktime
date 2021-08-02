@@ -43,6 +43,7 @@ export default {
 		display: "swap",
 		families: {
 			Prompt: true,
+			"Roboto Mono": true,
 		},
 	},
 
@@ -63,7 +64,8 @@ export default {
 				"faCalendarAlt",
 				"faBan",
 				"faBars",
-				"faTimes"
+				"faTimes",
+				"faUser",
 			],
 		},
 	},
