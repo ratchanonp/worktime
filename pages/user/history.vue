@@ -13,17 +13,22 @@
 			/>
 			<!-- eslint-disable-next-line vue/attribute-hyphenation -->
 			<!-- History -->
-			<p class="text-2xl text-right my-2">ผลลัพธ์ {{ history.length }} รายการ</p>
+			<div v-if="$apollo.queries.history.loading">Loading...</div>
+			<div v-else>
+				<p class="text-2xl text-right my-2">
+					ผลลัพธ์ {{ history.length }} รายการ
+				</p>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-				<History
-					v-for="worktime in history"
-					:key="worktime._id"
-					:location="worktime.location"
-					:date="worktime.date"
-					:checkIn="worktime.checkIn"
-					:checkOut="worktime.checkOut"
-				/>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+					<History
+						v-for="worktime in history"
+						:key="worktime._id"
+						:location="worktime.location"
+						:date="worktime.date"
+						:checkIn="worktime.checkIn"
+						:checkOut="worktime.checkOut"
+					/>
+				</div>
 			</div>
 		</div>
 	</div>

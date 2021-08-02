@@ -4,7 +4,8 @@
 			<font-awesome-icon icon="briefcase" /> ลงเวลาปฎิบัติราชการ
 		</h1>
 		<div class="bg-white rounded-xl min-w-full p-5">
-			<UserInfo :fullname="me.fullName" :position="me.role[0]" />
+			<p v-if="$apollo.queries.me.loading">Loading...</p>
+			<UserInfo v-else :fullname="me.fullName" :position="me.role[0]" />
 
 			<div class="regis p-5 mb-3 rounded-xl bg-gray-50">
 				<div class="flex flex-col md:flex-row">
@@ -26,8 +27,8 @@
 						{{ $moment(Date.now()).format("LLLL") }}
 					</p>
 				</div>
-
-				<div class="grid xl:grid-cols-2 md:grid-cols-1 gap-4">
+				<p v-if="$apollo.queries.status.loading">Loading...</p>
+				<div v-else class="grid xl:grid-cols-2 md:grid-cols-1 gap-4">
 					<div
 						v-if="status.checkIn == null"
 						class="
@@ -55,7 +56,6 @@
 							cursor-not-allowed
 							bg-green-200
 							md:flex-col
-							
 							p-5
 							rounded-xl
 							text-center text-white text-3xl
@@ -95,7 +95,6 @@
 							cursor-not-allowed
 							bg-red-200
 							md:flex-col
-					
 							p-5
 							rounded-xl
 							text-center text-white text-3xl
@@ -110,9 +109,12 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="today-status p-5 rounded-xl bg-gray-50">
 				<p class="text-4xl font-bold mb-3">สถานะวันนี้</p>
+				<p v-if="$apollo.queries.status.loading">Loading...</p>
 				<History
+					v-else
 					:key="status.updatedAt"
 					class="bg-white"
 					:location="status.location"
