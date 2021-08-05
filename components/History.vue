@@ -75,11 +75,12 @@
 						align-middle
 						text-xl
 						md:text-3xl
+						items-center
 					"
 				>
-					<p class="text-green-600 mr-3 md:mr-0 md:mb-3">
-						<font-awesome-icon icon="sign-in-alt" />
-					</p>
+					
+					<font-awesome-icon icon="sign-in-alt" class="text-green-600 mr-3 md:mr-0 md:mb-3" />
+					
 					<p class="text-gray-500">
 						{{
 							checkIn != null
@@ -98,11 +99,12 @@
 						align-middle
 						text-xl
 						md:text-3xl
+						items-center
 					"
 				>
-					<p class="text-red-600 mr-3 md:mr-0 md:mb-3">
-						<font-awesome-icon icon="sign-out-alt" />
-					</p>
+					
+						<font-awesome-icon icon="sign-out-alt" class="text-red-600 mr-3 md:mr-0 md:mb-3"/>
+					
 					<p class="text-gray-500">
 						{{
 							checkOut != null

@@ -69,7 +69,7 @@
 						<p class="font-bold">ลงชื่อเข้า</p>
 					</div>
 					<div
-						v-if="status.checkOut == null"
+						v-if="status.checkOut == null && status.checkIn != null"
 						class="
 							flex flex-row
 							cursor-pointer
@@ -130,9 +130,11 @@
 <script>
 // eslint-disable-next-line import/no-named-as-default
 import gql from "graphql-tag";
+import moment from "moment";
 import userCheckIn from "../../gql/userCheckIn.gql";
 import userCheckOut from "../../gql/userCheckOut.gql";
-
+moment().format();
+moment.locale("th");
 export default {
 	layout: "user",
 	data() {
@@ -166,11 +168,6 @@ export default {
 					.then(({ data }) => {
 						this.status = data.checkIn;
 					});
-				this.$swal({
-					title: "ลงเวลาปฎิบัติราชการเรียบร้อยแล้ว",
-					message: `เวลา ${this.status.checkIn}`,
-					icon: "success",
-				});
 			} catch (error) {
 				this.$swal({
 					title: "เกิดข้อผิดพลาด",
@@ -190,11 +187,6 @@ export default {
 					.then(({ data }) => {
 						this.status = data.checkOut;
 					});
-				this.$swal({
-					title: "ลงเวลาปฎิบัติราชการเรียบร้อยแล้ว",
-					message: `เวลา ${this.status.checkOut}`,
-					icon: "success",
-				});
 			} catch (error) {
 				this.$swal({
 					title: "เกิดข้อผิดพลาด",
@@ -220,10 +212,12 @@ export default {
 				confirmButtonText: "ลงเวลา",
 				cancelButtonText: "ยกเลิก",
 				showLoaderOnConfirm: true,
+				preConfirm: async () => {
+					await this.checkIn();
+				},
 			}).then((result) => {
 				if (result.isConfirmed) {
 					this.inputLocation = result.value;
-					this.checkIn();
 				}
 			});
 		},
@@ -238,9 +232,19 @@ export default {
 				confirmButtonText: "ลงชื่อออก",
 				cancelButtonText: "ยกเลิก",
 				showLoaderOnConfirm: true,
+				preConfirm: async () => {
+					const time = await this.checkOut();
+					return time;
+				},
 			}).then((result) => {
 				if (result.isConfirmed) {
-					this.checkOut();
+					this.$swal({
+						title: "ลงเวลาปฎิบัติราชการเรียบร้อยแล้ว",
+						text: `เวลา ${moment
+							.unix(this.status.checkOut)
+							.format("HH:mm:ss")}`,
+						icon: "success",
+					});
 				}
 			});
 		},

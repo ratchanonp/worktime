@@ -10,7 +10,12 @@
 					/>
 					<div class="flex flex-col">
 						<p>บุคลากร</p>
-						<p class="text-4xl font-extrabold">{{ todayCheckedIns.length + todayNotCheckedIn.length }}</p>
+						<p class="text-4xl font-extrabold">
+							{{
+								todayCheckedIns.length +
+								todayNotCheckedIn.length
+							}}
+						</p>
 						<p>คน</p>
 					</div>
 				</div>
@@ -41,6 +46,7 @@
 					</div>
 				</div>
 			</div>
+			<button class="bg-green-500 " @click="downloadReport()">Download Report ประจำวันนี้</button>
 			<div class="grid grid-cols-2 gap-4 xl:mb-auto">
 				<p v-if="$apollo.queries.todayCheckedIns.loading">Loading</p>
 				<div v-else class="checkin p-4 border-2 rounded-lg">
@@ -133,8 +139,8 @@
 						</li>
 					</ul>
 					<p class="text-sm text-gray-400 text-right">
-							ทั้งหมด {{ todayNotCheckedIn.length }} คน
-						</p>
+						ทั้งหมด {{ todayNotCheckedIn.length }} คน
+					</p>
 				</div>
 				<p v-if="$apollo.queries.todayNotCheckedOut.loading">Loading</p>
 				<div
@@ -155,9 +161,10 @@
 						</li>
 					</ul>
 					<p class="text-sm text-gray-400 text-right">
-							ทั้งหมด {{ todayNotCheckedOut.length }} คน
-						</p>
+						ทั้งหมด {{ todayNotCheckedOut.length }} คน
+					</p>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -166,6 +173,13 @@
 <script>
 // eslint-disable-next-line import/no-named-as-default
 import gql from "graphql-tag";
+import moment from "moment";
+import xlsx from "json-as-xlsx";
+
+// Moment Config
+moment().format();
+moment.locale("th");
+
 export default {
 	layout: "admin",
 	data() {
@@ -174,6 +188,9 @@ export default {
 			todayCheckedOuts: [],
 			todayNotCheckedIn: [],
 			todayNotCheckedOut: [],
+			todayAll: [],
+			startDate: "",
+			endDate: "",
 		};
 	},
 	head() {
@@ -233,6 +250,66 @@ export default {
 					}
 				}
 			`,
+		},
+	},
+	methods: {
+		async downloadReport() {
+			
+			// eslint-disable-next-line new-cap
+			const currentTime = new Date();
+			const currentDate = currentTime.toISOString().slice(0, 10);
+			const unix = moment.utc(currentDate).unix();
+
+			this.startDate = unix.toString();
+			this.endDate = unix.toString();
+
+			await this.$apollo
+				.query({
+					query: gql`
+						query todayAll($startDate: String!, $endDate: String!) {
+							todayAll: worktimeByDates(
+								duration: {
+									startDate: $startDate
+									endDate: $endDate
+								}
+							) {
+								_id
+								date
+								location
+								checkIn
+								checkOut
+								user {
+									fullName
+								}
+							}
+						}
+					`,
+					variables: {
+						startDate: this.startDate,
+						endDate: this.endDate,
+					},
+				})
+				.then(({ data }) => {
+					this.todayAll = data.todayAll;
+				});
+			const data = [
+				{
+					sheet: "รายงาน",
+					columns: [
+						{ label: "ชื่อ-สกุล", value: (row) => row.user.fullName },
+						{ label: "เวลามา", value: (row) => moment.unix(row.checkIn).format("HH:mm:ss")},
+						{ label: "เวลากลับ", value: (row) => row.checkOut ? moment.unix(row.checkOut).format("HH:mm:ss"): "ไม่ได้ลงชื่อออก" },
+						{ label: "สถานที่ปฏิบัติราชการ", value: (row) => row.location },
+					],
+					content: this.todayAll,
+				},
+			];
+			const settings = {
+				fileName: `รายงานประจำวันที่ ${moment.unix(this.startDate).format("LL")}`,
+				type: "buffer",
+				bookType: "xlsx",
+			};
+			await xlsx(data, settings);
 		},
 	},
 };
