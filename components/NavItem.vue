@@ -29,3 +29,10 @@ export default {
 	},
 };
 </script>
+
+<style>
+	.nuxt-link-exact-active {
+		color: #fff !important;
+		background-color: #40BF6C !important;
+	}
+</style>
