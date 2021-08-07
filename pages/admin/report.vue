@@ -1,12 +1,14 @@
 <template>
-  <div class="flex-1 p-10 bg-gray-100">
-    <h1 class="text-5xl font-bold mb-10">รายงานข้อมูล</h1>
-    <div class="bg-white rounded-xl w-full h-screen"></div>
-  </div>
+	<div class="flex-1 p-10">
+		<h1 class="text-4xl md:text-5xl font-bold mb-3 md:mb-10 text-base-content border-primary border-b-8 pb-1 inline-block">
+			<font-awesome-icon icon="clipboard-list" /> รายงาน
+		</h1>
+		<div class="bg-white rounded-xl w-full h-screen"></div>
+	</div>
 </template>
 
 <script>
-    export default {
-        layout: 'admin',
-    }
+export default {
+	layout: "admin",
+};
 </script>

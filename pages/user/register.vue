@@ -1,15 +1,15 @@
 <template>
-	<div class="flex-1 p-5 md:p-10 bg-gray-100">
-		<h1 class="text-4xl md:text-5xl font-bold mb-3 md:mb-10">
+	<div class="flex-1 p-5 md:p-10 ">
+		<h1 class="text-4xl md:text-5xl font-bold mb-3 md:mb-10 text-base-content border-primary border-b-8 pb-1 inline-block">
 			<font-awesome-icon icon="briefcase" /> ลงเวลาปฎิบัติราชการ
 		</h1>
-		<div class="bg-white rounded-xl min-w-full p-5">
+		<div class="bg-white rounded-xl min-w-full ">
 			<p v-if="$apollo.queries.me.loading">Loading...</p>
 			<UserInfo v-else :fullname="me.fullName" :position="me.role[0]" />
 
-			<div class="regis p-5 mb-3 rounded-xl bg-gray-50">
+			<div class="regis p-5 mb-3 rounded-xl shadow">
 				<div class="flex flex-col md:flex-row">
-					<p class="text-4xl font-bold mb-3 md:w-1/2">
+					<p class="text-4xl font-bold mb-3 md:w-1/2 text-black">
 						ลงเวลาปฎิบัติราชการ
 					</p>
 
@@ -35,7 +35,8 @@
 							flex flex-row
 							cursor-pointer
 							md:flex-col
-							bg-green-400
+							bg-primary
+							hover:bg-primary-focus
 							p-5
 							rounded-xl
 							text-center text-white text-3xl
@@ -74,7 +75,8 @@
 							flex flex-row
 							cursor-pointer
 							md:flex-col
-							bg-red-400
+							bg-accent
+							hover:bg-accent-focus
 							p-5
 							rounded-xl
 							text-center text-white text-3xl
@@ -110,8 +112,8 @@
 				</div>
 			</div>
 
-			<div class="today-status p-5 rounded-xl bg-gray-50">
-				<p class="text-4xl font-bold mb-3">สถานะวันนี้</p>
+			<div class="today-status p-5 rounded-xl shadow">
+				<p class="text-4xl font-bold mb-3 text-black">สถานะวันนี้</p>
 				<p v-if="$apollo.queries.status.loading">Loading...</p>
 				<History
 					v-else

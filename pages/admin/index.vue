@@ -1,51 +1,58 @@
-<template>
-	<div class="flex-1 p-10 bg-gray-100">
-		<h1 class="text-5xl font-bold mb-10">Dashboard Admin</h1>
-		<div class="bg-white rounded-xl w-full min-h-screen p-5">
-			<div class="flex p-5 bg-gray-100 mb-5 rounded-xl gap-4">
-				<div class="flex-1 flex items-center border-r-2">
+<template data-theme="light">
+	<div class="flex-1 p-10">
+		<h1 class="text-4xl md:text-5xl font-bold mb-3 md:mb-10 text-base-content border-primary border-b-8 inline-block">
+			<font-awesome-icon icon="tachometer-alt" /> Dashboard
+		</h1>
+		<div class="bg-white rounded-xl w-full min-h-screen">
+			<!-- Stats -->
+			<div class="stats w-full shadow mb-5">
+				<!-- All Users -->
+				<div class="stat">
 					<font-awesome-icon
 						icon="user"
-						class="text-blue-400 text-6xl mr-5"
+						class="stat-figure text-secondary text-6xl mr-5"
 					/>
 					<div class="flex flex-col">
-						<p>บุคลากร</p>
-						<p class="text-4xl font-extrabold">{{ todayCheckedIns.length + todayNotCheckedIn.length }}</p>
-						<p>คน</p>
+						<p class="stat-title">บุคลากร</p>
+						<p class="stat-value text-secondary">{{ todayCheckedIns.length + todayNotCheckedIn.length }}</p>
+						<p class="stat-desc">คน</p>
 					</div>
 				</div>
-				<div class="flex-1 flex items-center border-r-2">
+				<!-- Sign in -->
+				<div class="stat">
 					<font-awesome-icon
 						icon="sign-in-alt"
-						class="text-green-400 text-6xl mr-5"
+						class="stat-figure text-primary text-6xl mr-5"
 					/>
 					<div class="flex flex-col">
-						<p>ลงชื่อเข้า</p>
-						<p class="text-4xl font-extrabold">
+						<p class="stat-title">ลงชื่อเข้า</p>
+						<p class="stat-value text-primary">
 							{{ todayCheckedIns.length }}
 						</p>
-						<p>คน</p>
+						<p class="stat-desc">คน</p>
 					</div>
 				</div>
-				<div class="flex-1 flex items-center">
+				<!-- Sign Out -->
+				<div class="stat">
 					<font-awesome-icon
 						icon="sign-out-alt"
-						class="text-red-400 text-6xl mr-5"
+						class="stat-figure text-accent text-6xl mr-5"
 					/>
 					<div class="flex flex-col">
-						<p>ลงชื่อออก</p>
-						<p class="text-4xl font-extrabold">
+						<p class="stat-title">ลงชื่อออก</p>
+						<p class="stat-value text-accent">
 							{{ todayCheckedOuts.length }}
 						</p>
-						<p>คน</p>
+						<p class="stat-desc">คน</p>
 					</div>
 				</div>
 			</div>
-			<div class="grid grid-cols-2 gap-4 xl:mb-auto">
+			<!-- Data Grid -->
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4 xl:mb-auto text-black">
 				<p v-if="$apollo.queries.todayCheckedIns.loading">Loading</p>
-				<div v-else class="checkin p-4 border-2 rounded-lg">
-					<h1 class="text-4xl mb-3">รายชื่อผู้ลงชื่อเข้า</h1>
-					<hr class="mb-3" />
+				<div v-else class="checkin p-4 shadow rounded-lg">
+					<h2 class="inline-block text-base-content text-xl mb-3 border-primary border-b-4 pb-1">รายชื่อผู้ลงชื่อเข้า</h2>
+					
 					<p v-if="todayCheckedIns.length == 0">ไม่มีข้อมูล</p>
 					<div>
 						<div
@@ -57,7 +64,7 @@
 								class="
 									w-28
 									font-bold
-									text-green-500 text-left
+									text-primary text-left
 									font-roboto-mono
 								"
 							>
@@ -70,17 +77,17 @@
 							</div>
 							<div class="w-1/2">{{ checkin.user.fullName }}</div>
 						</div>
-						<p class="text-sm text-gray-400 text-right">
+						<p class="text-xs text-gray-400 text-right">
 							ทั้งหมด {{ todayCheckedIns.length }} คน
 						</p>
 					</div>
 				</div>
 				<p v-if="$apollo.queries.todayCheckedOuts.loading">Loading</p>
-				<div v-else class="checkout p-4 border-2 rounded-lg xl:mb-auto">
-					<h1 class="text-4xl mb-3">รายชื่อผู้ลงชื่อออก</h1>
-					<hr class="mb-3" />
+				<div v-else class="checkout p-4 shadow rounded-lg xl:mb-auto">
+					<h1 class="inline-block text-base-content text-xl mb-3 border-primary border-b-4 pb-1">รายชื่อผู้ลงชื่อออก</h1>
+					
 					<p v-if="todayCheckedOuts.length == 0">
-						{{ todayCheckedOuts }}
+						ไม่มีข้อมูล
 					</p>
 					<div>
 						<div
@@ -109,7 +116,7 @@
 								{{ checkout.user.fullName }}
 							</div>
 						</div>
-						<p class="text-sm text-gray-400 text-right">
+						<p class="text-xs text-gray-400 text-right">
 							ทั้งหมด {{ todayCheckedOuts.length }} คน
 						</p>
 					</div>
@@ -117,14 +124,14 @@
 				<p v-if="$apollo.queries.todayNotCheckedIn.loading">Loading</p>
 				<div
 					v-else
-					class="notcheckin p-4 border-2 rounded-lg xl:mb-auto"
+					class="notcheckin p-4 shadow rounded-lg xl:mb-auto"
 				>
-					<h1 class="text-4xl mb-3">รายชื่อผู้ยังไม่ได้ลงชื่อเข้า</h1>
-					<hr class="mb-3" />
+					<h1 class="inline-block text-base-content text-xl mb-3 border-primary border-b-4 pb-1">รายชื่อผู้ยังไม่ได้ลงชื่อเข้า</h1>
+					
 					<p v-if="todayNotCheckedIn.length == 0">
 						{{ todayNotCheckedIn }}
 					</p>
-					<ul class="grid grid-cols-3">
+					<ul class="grid grid-cols-2">
 						<li
 							v-for="usernocheckin in todayNotCheckedIn"
 							:key="usernocheckin.fullName"
@@ -132,21 +139,21 @@
 							{{ usernocheckin.fullName }}
 						</li>
 					</ul>
-					<p class="text-sm text-gray-400 text-right">
+					<p class="text-xs text-gray-400 text-right">
 							ทั้งหมด {{ todayNotCheckedIn.length }} คน
 						</p>
 				</div>
 				<p v-if="$apollo.queries.todayNotCheckedOut.loading">Loading</p>
 				<div
 					v-else
-					class="notcheckout p-4 border-2 rounded-lg xl:mb-auto"
+					class="notcheckout p-4 shadow rounded-lg xl:mb-auto"
 				>
-					<h1 class="text-4xl mb-3">รายชื่อผู้ยังไม่ได้ลงชื่อออก</h1>
-					<hr class="mb-3" />
+					<h1 class="inline-block text-base-content text-xl mb-3 border-primary border-b-4 pb-1">รายชื่อผู้ยังไม่ได้ลงชื่อออก</h1>
+					
 					<p v-if="todayNotCheckedOut.length == 0">
-						{{ todayNotCheckedOut }}
+						ไม่มีข้อมูล
 					</p>
-					<ul class="grid grid-cols-3">
+					<ul class="grid grid-cols-2">
 						<li
 							v-for="usernocheckout in todayNotCheckedOut"
 							:key="usernocheckout.fullName"
@@ -154,7 +161,7 @@
 							{{ usernocheckout.fullName }}
 						</li>
 					</ul>
-					<p class="text-sm text-gray-400 text-right">
+					<p class="text-xs text-gray-400 text-right">
 							ทั้งหมด {{ todayNotCheckedOut.length }} คน
 						</p>
 				</div>

@@ -1,9 +1,9 @@
 <template>
-	<div class="flex-1 p-5 md:p-10 bg-gray-100">
-		<h1 class="text-4xl md:text-5xl font-bold mb-3 md:mb-10">
+	<div class="flex-1 p-5 md:p-10">
+		<h1 class="text-4xl md:text-5xl font-bold mb-3 md:mb-10 text-base-content border-primary border-b-8 pb-1 inline-block">
 			<font-awesome-icon icon="history" /> ประวัติการลงเวลา
 		</h1>
-		<div class="bg-white rounded-xl w-full p-5">
+		<div class="bg-white rounded-xl w-full">
 			<div v-if="$apollo.queries.me.loading">Loading...</div>
 			<UserInfo
 				v-else
@@ -15,11 +15,7 @@
 			<!-- History -->
 			<div v-if="$apollo.queries.history.loading">Loading...</div>
 			<div v-else>
-				<p class="text-2xl text-right my-2">
-					ผลลัพธ์ {{ history.length }} รายการ
-				</p>
-
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+				<div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-2">
 					<History
 						v-for="worktime in history"
 						:key="worktime._id"
@@ -29,6 +25,9 @@
 						:checkOut="worktime.checkOut"
 					/>
 				</div>
+				<p class="text-md text-right text-gray-500">
+					ผลลัพธ์ {{ history.length }} รายการ
+				</p>
 			</div>
 		</div>
 	</div>

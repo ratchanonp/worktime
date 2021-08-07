@@ -1,30 +1,31 @@
 <template>
-	<div class="flex h-screen font-prompt bg-green-100">
-		<div class="content m-auto">
-			<div class="title mb-20 text-center">
-				<img class="mx-auto" src="logo.png" alt="" />
-				<h1 class="text-4xl md:text-7xl font-bold">ระบบลงเวลาปฏิบัติราชการ</h1>
-				<h2 class="text-2xl md:text-5xl">โรงเรียนสินปุญคุณวิชญ์</h2>
+	<div class="flex min-h-screen font-prompt mx-auto justify-center">
+			<div class="flex flex-col my-auto">
+				<div class="title mb-10">
+					<img class="w-32 h-32" src="logo.png" alt="" />
+					<h1 class="text-2xl md:text-4xl font-bold text-black">
+						ระบบลงเวลาปฏิบัติราชการ
+					</h1>
+					<h2 class="text-1xl md:text-2xl text-primary">
+						โรงเรียนสินปุญคุณวิชญ์
+					</h2>
+				</div>
+				<div class="bg-white p-5 w-1/2 rounded-xl shadow-xl w-full mb-5">
+					<LoginForm />
+				</div>
+				<small class="text-white"
+					>&copy; Ratchanon Panmas</small
+				>
 			</div>
-			<div class="bg-white p-5 rounded w-full mx-1 md:w-1/2 md:mx-auto">
-				<LoginForm />
-			</div>
-			<small class="text-white text-center">&copy; Ratchanon Panmas</small>
-		</div>
 	</div>
 </template>
 
 <script>
-
 export default {
-	
-	
 	head() {
 		return {
 			title: "เข้าสู่ระบบ",
 		};
 	},
-	
-	
 };
 </script>

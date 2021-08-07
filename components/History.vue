@@ -5,16 +5,16 @@
 			class="
 				text-4xl
 				bg-white
-				border-2
+				shadow
 				p-5
 				rounded-xl
-				text-red-500 text-center
+				text-accent text-center
 				font-bold
 			"
 		>
 			ยังไม่ได้บันทึก
 		</p>
-		<div v-else class="flex flex-col md:flex-row rounded-xl border-2 p-5">
+		<div v-else class="flex flex-col md:flex-row rounded-xl shadow p-5">
 			<!-- Date -->
 			<div class="w-full md:w-1/2">
 				<p
@@ -74,10 +74,10 @@
 						text-right
 						align-middle
 						text-xl
-						md:text-3xl
+						md:text-2xl
 					"
 				>
-					<p class="text-green-600 mr-3 md:mr-0 md:mb-3">
+					<p class="text-primary mr-3 md:mr-0 md:mb-3">
 						<font-awesome-icon icon="sign-in-alt" />
 					</p>
 					<p class="text-gray-500">
@@ -97,17 +97,17 @@
 						text-right
 						align-middle
 						text-xl
-						md:text-3xl
+						md:text-2xl
 					"
 				>
-					<p class="text-red-600 mr-3 md:mr-0 md:mb-3">
+					<p class="text-accent mr-3 md:mr-0 md:mb-3">
 						<font-awesome-icon icon="sign-out-alt" />
 					</p>
 					<p class="text-gray-500">
 						{{
 							checkOut != null
 								? $moment.unix(checkOut).format("HH:mm:ss")
-								: "ไม่มีข้อมูล"
+								: "-"
 						}}
 					</p>
 				</div>

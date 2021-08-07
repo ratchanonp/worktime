@@ -1,7 +1,7 @@
 <template>
 	<form v-if="!isAuthenticated" class="font-light" @submit.prevent="onSubmit">
 		<div class="input-group mb-2 flex-inline">
-			<label for="email" class="text-md">Email</label>
+			<label for="email" class="text-md text-neutral">Email</label>
 			<input
 				id="username"
 				v-model="user.username"
@@ -21,7 +21,7 @@
 			/>
 		</div>
 		<div class="input-group mb-5 flex-inline">
-			<label for="password" class="text-md">รหัสผ่าน</label>
+			<label for="password" class="text-md text-neutral">รหัสผ่าน</label>
 			<input
 				id="password"
 				v-model="user.password"
@@ -43,15 +43,17 @@
 		<div class="flex">
 			<button
 				type="submit"
+				:class="{ loading : loggingIn}"
 				class="
-					bg-green-500
 					w-full
-					hover:bg-green-600
+					hover:bg-primary-focus
 					text-white
-					px-2
-					py-1
+					px-3
+					py-1.5
 					rounded
 					text-lg
+					btn
+					btn-primary
 				"
 			>
 				{{ loggingIn ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ" }}

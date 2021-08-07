@@ -1,13 +1,12 @@
 <template>
-	<li class="nav-item px-4 py-2.5 hover:bg-green-500 rounded">
-		<a class="nav-link flex flex-row" :href="to">
+	<li>
+		<NuxtLink :to="to" class="flex ">
 			<div class="w-8 mr-2">
-				<font-awesome-icon :icon="icon" class="text-xl" />
+					<font-awesome-icon :icon="icon" class="text-xl" />
 			</div>
-			<div>
-				<span class="nav-link-text">{{ title }}</span>
-			</div>
-		</a>
+			{{ title }}
+			
+		</NuxtLink>
 	</li>
 </template>
 
@@ -29,3 +28,10 @@ export default {
 	},
 };
 </script>
+
+<style>
+	.nuxt-link-exact-active {
+		color: #fff !important;
+		background-color: #40BF6C !important;
+	}
+</style>

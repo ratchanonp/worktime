@@ -1,77 +1,44 @@
 <template>
-	<div class="relative font-prompt min-h-screen lg:flex">
-		<!-- Mobile -->
-		<div class="sidebar bg-green-600 lg:hidden">
-			<div
-				class="
-					flex flex-row
-					items-center
-					justify-between
-					title
-					px-4
-					py-1
-					text-white
-				"
-			>
-				<font-awesome-icon icon="briefcase" class="px-2 text-5xl" />
-				<h1 class="text-2xl mx-2 font-bold">Worktime</h1>
-				<font-awesome-icon
-					v-if="!isShow"
-					icon="bars"
-					class="px-2 text-5xl"
-					@click="showSidebar()"
-				/>
-				
-				<font-awesome-icon
-					v-else
-					icon="times" 
-					class="px-2 text-5xl"
-					@click="showSidebar()"
-				/>
+	<div class="font-prompt drawer drawer-mobile text-base-content">
+		<input id="sidebar-drawer" type="checkbox" class="drawer-toggle" />
+
+		<!-- Content -->
+		<div class="drawer-content">
+			<!-- Navbar -->
+			<div class="navbar bg-white px-5 py-2.5 w-full text-green-500 lg:hidden">
+				<div class="flex-1 flex xl:hidden navbar-start items-center">
+					<font-awesome-icon icon="briefcase" class="text-4xl" />
+					<h1 class="text-3xl mx-2 font-bold leading-4">
+						<span class="text-primary-focus lowercase">work</span><span class="uppercase text-neutral">time</span>
+						<br><small class="text-xs font-thin text-gray-500">user</small>
+					</h1>
+				</div>
+				<div class="flex-1 navbar-end xl:hidden">
+					<label
+						for="sidebar-drawer"
+						class="btn btn-sqaure btn-ghost"
+					>
+						<font-awesome-icon
+							icon="bars"
+							class="text-4xl cursor-pointer"
+						/>
+					</label>
+				</div>
 			</div>
+			<!-- Page Content -->
+			<Nuxt class="p-5" />
 		</div>
 
 		<!-- Sidebar -->
-		<Sidebar
-			:class="{ '-translate-x-full z-50': !isShow }"
-			class="
-				w-72
-				h-screen
-				absolute
-				top-0
-				sidebar
-				bg-green-600
-				h-screen
-				p-2
-				text-white
-				inset-y-0
-				left-0
-				transform
-				lg:relative lg:translate-x-0
-				transition
-				duration-200
-				ease-in-out
-			"
-		/>
-
-		<!-- Content -->
-		<Nuxt />
+		<div class="drawer-side">
+			<label for="sidebar-drawer" class="drawer-overlay"></label>
+			<Sidebar class="border-r" />
+		</div>
 	</div>
 </template>
 
 <script>
 export default {
 	middleware: ["isAuth"],
-	data() {
-		return {
-			isShow: false,
-		};
-	},
-	methods: {
-		showSidebar() {
-			this.isShow = !this.isShow;
-			console.log(this.isShow);
-		},
-	},
 };
 </script>
