@@ -1,12 +1,13 @@
 <template>
-	<div class="flex-1 p-2 md:p-10 bg-gray-100">
-		<h1 class="text-5xl font-bold mb-3 md:mb-10">Dashboard</h1>
+	<div class="flex-1 p-2 md:p-10">
+		<h1 class="text-4xl md:text-5xl font-bold mb-3 md:mb-10 text-base-content border-primary border-b-8 pb-1 inline-block">
+			<font-awesome-icon icon="tachometer-alt" /> Dashboard
+		</h1>
 		<div
 			class="
 				bg-white
 				rounded-xl
 				w-full
-				p-5
 				grid grid-cols-1
 				xl:grid-cols-2
 				gap-4
@@ -14,21 +15,20 @@
 		>
 			<div v-if="$apollo.queries.me.loading">Loading...</div>
 			<UserInfo v-else :fullname="me.fullName" :position="me.role[0]" />
-			<div class="today-status p-5 rounded-xl bg-gray-50">
-				<p class="text-4xl font-bold mb-3">สถานะวันนี้</p>
+			<div class="today-status p-5 rounded-xl shadow">
+				<p class="text-4xl font-bold mb-3 text-black">สถานะวันนี้</p>
 				<div v-if="$apollo.queries.status.loading">Loading...</div>
 				<History
 					v-else
 					:key="status.createdAt"
-					class="bg-white"
 					:location="status.location"
 					:date="status.date"
 					:checkIn="status.checkIn"
 					:checkOut="status.checkOut"
 				/>
 			</div>
-			<div class="xl:col-span-2 p-5 rounded-xl bg-gray-50">
-				<p class="text-4xl font-bold mb-3">สถิติ</p>
+			<div class="xl:col-span-2 p-5 rounded-xl shadow">
+				<p class="text-4xl font-bold mb-3 text-black">สถิติ</p>
 			</div>
 		</div>
 	</div>
