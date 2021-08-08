@@ -10,9 +10,8 @@
 			<h1
 				class="
 					text-2xl
-					text-black
+					font-medium
 					md:text-4xl
-					font-bold
 					md:mb-3
 					text-center
 					md:text-left

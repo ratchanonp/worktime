@@ -1,14 +1,14 @@
 <template>
-	<aside class="flex flex-col bg-white text-black w-72 min-h-screen">
+	<aside class="flex flex-col bg-white w-72 min-h-screen">
 		<div class="flex flex-row items-center px-5 md:px-5 py-2.5">
 			<font-awesome-icon
 				icon="briefcase"
 				class="px-2 text-6xl text-primary-focus"
 			/>
-			<h1 class="text-3xl mx-2 font-bold leading-4">
-				<span class="text-primary-focus lowercase">work</span><span class="uppercase text-neutral">time</span>
-				<small class="text-xs font-thin text-gray-500">admin</small>
-			</h1>
+			<h1 class="text-3xl mx-2 font-bold leading-4 tracking-wider">
+						<span class="lowercase text-primary-focus">work</span><span class="uppercase text-neutral">time</span>
+						<br><small class="text-xs font-thin text-gray-500">admin</small>
+					</h1>
 		</div>
 		<ul class="menu p-5 overflex-y-auto compact">
 			<NavItem
