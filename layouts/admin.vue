@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<!-- Page Content -->
-			<Nuxt />
+			<Nuxt class="p-5" />
 		</div>
 
 		<!-- Sidebar -->

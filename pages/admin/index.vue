@@ -1,5 +1,5 @@
 <template data-theme="light">
-	<div class="flex-1 p-10">
+	<div class="flex-1">
 		<h1 class="text-4xl font-medium md:text-5xl mb-3 md:mb-10 text-base-content border-primary border-b-8 inline-block">
 			<font-awesome-icon icon="tachometer-alt" /> Dashboard
 		</h1>
@@ -131,7 +131,7 @@
 					<p v-if="todayNotCheckedIn.length == 0">
 						{{ todayNotCheckedIn }}
 					</p>
-					<ul class="grid grid-cols-2">
+					<ul class="grid grid-cols-1 md:grid-cols-2">
 						<li
 							v-for="usernocheckin in todayNotCheckedIn"
 							:key="usernocheckin.fullName"
