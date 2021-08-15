@@ -5,7 +5,7 @@
 		<!-- Content -->
 		<div class="drawer-content">
 			<!-- Navbar -->
-			<div class="navbar bg-white px-5 py-2.5 w-full text-primary-focus xl:hidden">
+			<div class="navbar bg-white px-5 py-2.5 w-full text-primary-focus lg:hidden">
 				<div class="flex-1 flex xl:hidden navbar-start items-center">
 					<div class="w-12">
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-1 p-5 md:p-10 ">
+	<div class="flex-1 p-5 lg:p-10 ">
 		<h1 class="text-4xl font-medium md:text-5xl mb-3 md:mb-10 text-base-content border-primary border-b-8 pb-1 inline-block">
 			<font-awesome-icon icon="briefcase" /> ลงเวลาปฎิบัติราชการ
 		</h1>
