@@ -59,6 +59,12 @@ export default {
 					icon: "briefcase",
 				},
 				{
+					id: "leave",
+					title: "ลาราชการ",
+					to: "/user/leave",
+					icon: "power-off"
+				},
+				{
 					id: "history",
 					title: "ประวัติการลงเวลา",
 					to: "/user/history",
