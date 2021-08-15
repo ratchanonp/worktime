@@ -68,6 +68,9 @@ export default {
 				"faBars",
 				"faTimes",
 				"faUser",
+				"faFilePdf",
+				"faFileExcel",
+				"faPowerOff"
 			],
 		},
 	},
@@ -95,6 +98,6 @@ export default {
 			plugins: [
 				["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
 			]
-		  }
+		}
 	},
 };
