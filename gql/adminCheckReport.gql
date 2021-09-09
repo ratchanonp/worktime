@@ -1,0 +1,14 @@
+query reportData($startDate: String!, $endDate: String!) {
+	reportData: worktimeByDates(
+		duration: { startDate: $startDate, endDate: $endDate }
+	) {
+		_id
+		date
+		location
+		checkIn
+		checkOut
+		user {
+			fullName
+		}
+	}
+}

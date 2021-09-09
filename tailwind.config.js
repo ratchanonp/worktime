@@ -26,5 +26,5 @@ module.exports = {
 		styled: true,
 		themes: ["emerald"],
 		rtl: false,
-	  },
+	},
 };

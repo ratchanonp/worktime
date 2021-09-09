@@ -76,21 +76,13 @@
 </template>
 
 <script>
-import xlsx from "json-as-xlsx";
 import moment from "moment";
-// eslint-disable-next-line import/no-named-as-default
-import gql from "graphql-tag";
+
+import checkData from "./report/fetchCheck";
+import excel from "./report/excel";
 
 export default {
 	layout: "admin",
-	data() {
-		return {
-			reportData: [],
-			leaveData: [],
-			startDate: "",
-			endDate: "",
-		};
-	},
 	head() {
 		return {
 			title: "รายงาน",
@@ -102,86 +94,13 @@ export default {
 			const currentDate = currentTime.toISOString().slice(0, 10);
 			const unix = moment.utc(currentDate).unix();
 
-			this.startDate = unix.toString();
-			this.endDate = unix.toString();
+			const startDate = unix.toString();
+			const endDate = unix.toString();
 
-			await this.fetchData();
-			await this.getExcel();
-		},
-		async fetchData() {
-			await this.$apollo
-				.query({
-					query: gql`
-						query reportData(
-							$startDate: String!
-							$endDate: String!
-						) {
-							reportData: worktimeByDates(
-								duration: {
-									startDate: $startDate
-									endDate: $endDate
-								}
-							) {
-								_id
-								date
-								location
-								checkIn
-								checkOut
-								user {
-									fullName
-								}
-							}
-						}
-					`,
-					variables: {
-						startDate: this.startDate,
-						endDate: this.endDate,
-					},
-				})
-				.then(({ data }) => {
-					this.reportData = data.reportData;
-				});
-		},
-		async getExcel() {
-			const data = [
-				{
-					sheet: "รายงาน",
-					columns: [
-						{
-							label: "ชื่อ-สกุล",
-							value: (row) => row.user.fullName,
-						},
-						{
-							label: "เวลามา",
-							value: (row) =>
-								moment.unix(row.checkIn).format("HH:mm:ss"),
-						},
-						{
-							label: "เวลากลับ",
-							value: (row) =>
-								row.checkOut
-									? moment
-										.unix(row.checkOut)
-										.format("HH:mm:ss")
-									: "ไม่ได้ลงชื่อออก",
-						},
-						{
-							label: "สถานที่ปฏิบัติราชการ",
-							value: (row) => row.location,
-						},
-						{ label: "หมายเหตุ", value: "" },
-					],
-					content: this.reportData,
-				},
-			];
-			const settings = {
-				fileName: `รายงานประจำวันที่ ${moment
-					.unix(this.startDate)
-					.format("LL")}`,
-				type: "buffer",
-				bookType: "xlsx",
-			};
-			await xlsx(data, settings);
+			const reportCheckData = await checkData.fetch(startDate, endDate);
+			const reportLeaveData = [];
+
+			await excel.create(reportCheckData, reportLeaveData, startDate, endDate);
 		},
 	},
 };
